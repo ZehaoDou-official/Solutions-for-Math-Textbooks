@@ -10,9 +10,6 @@
 \allowdisplaybreaks[4]
 \maketitle
 
-\begin{abstract}
-
-\end{abstract}
 \newpage
 \paragraph{Problem 1} Show, using the formal manipulations for Ito's chain rule, that
 \[Y(t) := e^{W(t)-\frac{t}{2}}\]
@@ -216,5 +213,705 @@ Also, they are disjoint and $\bigcup_{j=1}^{m}A_j=\Omega$, which leads to $\{B\c
 \[\frac{P(B|A_k)P(A_k)}{\sum_{j=1}^{m}P(B|A_j)P(A_j)}=\frac{P(B\cap A_k)}{\sum_{j=1}^{m}P(B\cap A_j)}=\frac{P(B\cap A_k)}{P(B)}=P(A_k|B),\]
 which comes to our conclusion. Here, we used the additivity of probability measures.
 
+
+\paragraph{Problem 11} During one fall semester 105 women applied to Miskatonic University, of whom 76 were accepted, and 400 men applied, of whom 230 were accepted. During the subsequent spring semester, 300 women applied, of whom 100 were accepted, and 112 men applied, of whom 21 were accepted. Calculate numerically:\\
+(a) the probability of a female applicant being accepted during the fall,\\
+(b) the probability of a male applicant being accepted during the fall, \\
+(c) the probability of a female applicant being accepted during the spring,\\
+(d) the probability of a male applicant being accepted during the spring.\\
+Consider now the total applicant pool for both semesters together and calculate. \\
+(e) the probability of a female applicant being accepted,\\
+(f) the probability of a male applicant being accepted.\\
+Are the university's admission policies biased towards females or towards males?
+
+\paragraph{Solution of Problem 11} ~\\
+(a) $76/105 = 0.7238$.\\
+(b) $230/400 = 0.5750$.\\
+(c) $100/300 = 0.3333$.\\
+(d) $21/112 = 0.1875$.\\
+(e) $(100+76)/(300+105) = 0.4346$.\\
+(f) $(230+21)/(400+112) = 0.4902$.\\
+~\\
+Although in each semester, the probability of acceptance of females is higher than males, the university's admission policies biased towards males.
+
+\paragraph{Problem 12} Let $X$ be a real-valued, $\mathcal N(0,1)$ random variable, and set $Y:=X^2.$ Calculate the density $g$ of the distribution function for $Y$. \\
+(Hint: You must find $g$ so that $P(-\infty<Y\leqslant a)=\int_{-\infty}^{a}gdy $ for all $a$.)
+
+\paragraph{Solution of Problem 12} Notice that $Y=X^2 \geqslant 0$ always holds, which means $P(Y<0)=0$. For $\forall t\geqslant 0$, we have:
+\[P(-\infty<Y\leqslant t)=P(X^2\leqslant t)=P(-\sqrt{t}\leqslant X\leqslant \sqrt{t})=\int_{-\sqrt{t}}^{\sqrt{t}}\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{x^2}{2}\right)dx = 2\phi(\sqrt{t}).\]
+where $\phi(u)=\int_{0}^{u}\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{x^2}{2}\right)dx$. Then: $\phi'(u)=\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{u^2}{2}\right)$. Now, we can conclude that, the density function for distribution $Y$ is:
+\[g(t)=\frac{d}{dt}2\phi(\sqrt{t})= \frac{\frac{1}{\sqrt{2\pi}}\cdot\exp(-t/2)}{\sqrt{t}}=\frac{\exp(-t/2)}{\sqrt{2\pi t}}~~~~~(t\geqslant 0).\]
+To sum up, the density function is:
+\[g(t)=\frac{\exp(-t/2)}{\sqrt{2\pi t}}\cdot\mathbb{I}[t>0].\]
+
+
+\paragraph{Problem 13} Take $\Omega = [0,1]\times [0,1]$, with $\mathcal U$ the Borel sets and $P$ Lebesgue measure. Let $g:[0,1]\rightarrow\mathbb{R}$ be a continuous function.\\
+Define the random variables 
+\[X_1(\omega):=g(x_1), X_2(\omega):=g(x_2)~~\text{for}~\omega=(x_1,x_2)\in\Omega.\]
+Show that $X_1$ and $X_2$ are independent and identically distributed. 
+
+\paragraph{Solution of Problem 13} For $\forall A\in\mathcal B(\mathbb{R})$, we have:
+\[P(X_1\in A) = P(g^{-1}(A)\times [0,1])= P([0,1]\times g^{-1}(A))=P(X_2\in A).\]
+Here, since $g$ is a continuous function, we know that $g^{-1}(A)\in \mathcal B([0,1])$. Therefore, $X_1$ and $X_2$ are identically distributed. Next, we are going to prove that they are independently distributed. For $\forall A, B\in\mathcal B(\mathbb{R})$, we have:
+\[P(X_1\in A, X_2\in B) = P(g^{-1}(A)\times g^{-1}(B))=P'(g^{-1}(A))\times P'(g^{-1}(B)) = P(X_1\in A)\cdot P(X_2\in B),\]
+where $P'$ is the Lebesgue measure on $\mathbb{R}$. Therefore, we can conclude that $X_1$ and $X_2$ are independently distributed. 
+
+\paragraph{Problem 14} Let $f:[0,1]\rightarrow\mathbb{R}$ be continuous and define the Bernstein polynomial 
+\[b_n(x):=\sum_{k=0}^{n}f\left(\frac{k}{n}\right)\binom{n}{k}x^k(1-x)^{n-k}.\]
+Prove that $b_n\rightarrow f$ uniformly on $[0,1]$ as $n\rightarrow\infty$, by providing the details for the following steps.\\
+(1) Since $f$ is uniformly continuous, for each $\varepsilon > 0$ there exists $\delta(\varepsilon)>0$ such that $|f(x)-f(y)|\leqslant \varepsilon$ if $|x-y|\leqslant \delta(\varepsilon)$.\\
+(2) Given $x\in[0,1]$, take a sequence of independent random variables $X_k$ such that $P(X_k=1)=x, P(X_k=0)=1-x$. Write $S_n=X_1+X_2+\ldots+X_n$. Then $b_n(x)=\mathbb{E}f\left(\frac{S_n}{n}\right)$.\\
+(3) Therefore
+\begin{equation*}
+\begin{aligned}
+|b_n(x)-f(x)|&\leqslant \mathbb{E}\left|f\left(\frac{S_n}{n}\right)-f(x)\right|\\
+&= \int_A\left|f\left(\frac{S_n}{n}\right)-f(x)\right|dP + \int_{A^c}\left|f\left(\frac{S_n}{n}\right)-f(x)\right|dP,
+\end{aligned}    
+\end{equation*}
+for $A:=\left\{\omega\in\Omega|~|\frac{S_n}{n}-x|\leqslant \delta(\varepsilon)\right\}$. \\
+(4) Then show that
+\[|b_n(x)-f(x)|\leqslant \varepsilon+\frac{2M}{\delta(\varepsilon)^2}\cdot V\left(\frac{S_n}{n}\right)=\varepsilon+\frac{2M}{n\delta(\varepsilon)^2}V(X_1),\]
+for $M=\max|f|$. Conclude that $b_n\rightarrow f$ uniformly.
+ 
+\paragraph{Solution of Problem 14} ~\\
+(1) For any $\varepsilon > 0, x\in[0,1]$, there exists $\delta_x>0$ such that $|u-x|< \delta_x\Rightarrow |f(u)-f(x)|\leqslant \varepsilon/2$. Then: $\cup_{x\in[0,1]}(x-\delta_x, x+\delta_x)\supseteq[0,1]$. According to the Heine-Borel Covering Theorem: there exists a finite sub-covering. We denote it by $(a_1, b_1), (a_2, b_2), \ldots, (a_n, b_n)$.  Let $\delta = \min_{i,j}\{|a_i-b_j|>0\}$, then for $\forall x,y\in[0,1]$ such that $|x-y|<\delta$, they belong to the same interval, which leads to $|f(x)-f(y)|\leqslant \varepsilon$, and it comes to our conclusion. 
+
+~\\
+(2) Notice that:
+\begin{equation*}
+\begin{aligned}
+\mathbb{E}f\left(\frac{S_n}{n}\right) &= f\left(\frac{k}{n}\right)\cdot P(\{\text{There are }k\text{ 1-s and }n-k\text{ 0-s in }X_1, X_2, \ldots, X_n\})\\
+&= f\left(\frac{k}{n}\right)\cdot\binom{n}{k}x^k(1-x)^{n-k}=b_n(x),
+\end{aligned}    
+\end{equation*}
+which comes to our conclusion. 
+
+~\\
+(3) Notice that for any random variable $X$, we have:
+\[-\mathbb{E}|X|\leqslant \mathbb{E}X \leqslant \mathbb{E}|X|~\Rightarrow |\mathbb{E}X|\leqslant \mathbb{E}|X|.\]
+Therefore:
+\begin{equation*}
+\begin{aligned}
+|b_n(x)-f(x)| &= |\mathbb{E}[f(S_n/n)-f(x)]|\leqslant \mathbb{E}\left|f\left(\frac{S_n}{n}\right)-f(x)\right|\\
+&= \int_A\left|f\left(\frac{S_n}{n}\right)-f(x)\right|dP + \int_{A^c}\left|f\left(\frac{S_n}{n}\right)-f(x)\right|dP,
+\end{aligned}
+\end{equation*}
+for $A:=\{\omega\in\Omega|~|\frac{S_n}{n}-x|\leqslant \delta(\varepsilon)\}.$
+
+~\\
+(4) If $\omega\in A$, we have:$|\frac{S_n}{n}-x|\leqslant \delta(\varepsilon)\Rightarrow \left|f\left(\frac{S_n}{n}\right)-f(x)\right|\leqslant \varepsilon$. Therefore:
+\[\int_A\left|f\left(\frac{S_n}{n}\right)-f(x)\right|dP\leqslant \varepsilon\cdot P(A)\leqslant \varepsilon.\]
+On the other hand,
+\begin{equation*}
+\begin{aligned}
+&\int_{A^c}\left|f\left(\frac{S_n}{n}\right)-f(x)\right|dP \leqslant 2M\cdot P(A^c)\leqslant 2M\cdot\mathbb{E}\frac{\left(\frac{S_n}{n}-x\right)^2}{\delta(\varepsilon)^2}\\
+&=\frac{2M}{\delta(\varepsilon)^2}V\left(\frac{S_n}{n}\right)=\frac{2M}{n\delta(\varepsilon)^2}V(X_1).
+\end{aligned}    
+\end{equation*}
+After adding up the two inequalities above, we have:
+\[\|b_n-f\|_{\infty}\leqslant \varepsilon+\frac{2M}{n\delta(\varepsilon)^2}V(X_1).\]
+Then we have:
+\[\lim_{n\rightarrow\infty}\|b_n-f\|_{\infty}\leqslant \varepsilon.\] 
+Since $\varepsilon > 0$ can be any positive real number, we have:
+\[\lim_{n\rightarrow\infty}\|b_n-f\|_{\infty} = 0,\]
+which comes to our conclusion. 
+
+\paragraph{Problem 15} Let $X$ and $Y$ be independent random variables, and suppose that $f_X$ and $f_Y$ are the density functions for $X, Y$. Show that the density function for $X+Y$ is 
+\[f_{X+Y}(z)=\int_{-\infty}^{\infty} f_X(z-y)f_Y(y)dy.\]
+(Hint: If $g:\mathbb{R}\rightarrow\mathbb{R}$, we have
+\[\mathbb{E}[g(X+Y)]=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f_{X,Y}(x,y)g(x+y)dxdy,\]
+where $f_{X,Y}$ is the joint density function of $X,Y$. )
+
+\paragraph{Solution of Problem 15} Notice that, 
+\[\mathbb{E}[g(X+Y)]=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f_{X,Y}(x,y)g(x+y)dxdy.\]
+Let $Z=X+Y$, then:
+\begin{equation*}
+\begin{aligned}
+&\int_{-\infty}^{\infty} g(z)\cdot f_Z(z)dz = \mathbb{E}[g(X+Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f_{X,Y}(x,y)g(x+y)dxdy\\
+&= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f_X(x) f_Y(y)\cdot g(x+y)dxdy = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} f_Y(y)f_X(z-y) g(z) dzdy\\
+&= \int_{-\infty}^{\infty}g(z)\left(\int_{-\infty}^{\infty}f_Y(y)f_X(z-y)dy\right)dz.
+\end{aligned}    
+\end{equation*}
+Here, we use the fact that $X,Y$ are independent random variables and we also use the coordinate change of integration. Since $g$ can be any function on $Z$, we can conclusion that:
+\[f_{X+Y}(z) = \int_{-\infty}^{\infty}f_Y(y)f_X(z-y)dy,\]
+which comes to our conclusion. 
+
+\paragraph{Problem 16} Let $X$ and $Y$ be two independent positive random variables, each with density 
+\[f(x)=\begin{cases}e^{-x}~~~~\mbox{if $x\geqslant 0$}\\ 0~~~~~~~\mbox{if $x < 0$}\end{cases}.\]
+Find the density of $X+Y$. 
+
+\paragraph{Solution of Problem 16} Notice that for $\forall z\geqslant 0$, we have:
+\begin{equation*}
+\begin{aligned}
+&P(X+Y\leqslant z) =\mathbb{E}\mathbb{I}[X+Y\leqslant z] = \mathbb{E}_Y [\mathbb{E}\mathbb{I}[X+Y\leqslant z]|Y] = \mathbb{E}_Y P(X\leqslant z-Y)\\
+&= \int_{0}^{z} e^{-y}dy\cdot \int_{0}^{z-y} e^{-x} dx = \int_{0}^{z} e^{-y}(1-e^{-(z-y)})dy = 1-e^{-z}-ze^{-z} = 1-(z+1)e^{-z}.
+\end{aligned}    
+\end{equation*}
+After taking derivative over $z$, we know that the density of $X+Y$ is:
+\[g(z)=ze^{-z}~~(z\geqslant 0).\]
+
+\paragraph{Problem 17} Show that
+\[\lim_{n\rightarrow\infty}\int_0^1\int_0^1\ldots\int_0^1  f\left(\frac{x_1+x_2+\ldots+x_n}{n}\right)dx_1 dx_2\ldots dx_n = f\left(\frac12\right)\]
+for each continuous function $f$.
+
+(Hint: Let $X_1, X_2,\ldots, X_n$ be independent random variables, each of which has density function $f_i(x)=1$ if $0\leqslant x\leqslant 1$ and $=0$ otherwise. Then $P\left(\left|\frac{X_1+X_2+\ldots+X_n}{n}-\frac12\right|>\varepsilon\right)\leqslant \frac{1}{\varepsilon^2}V\left(\frac{X_1+X_2+\ldots+X_n}{n}\right)=\frac{1}{12\varepsilon^2 n}$.)
+
+\paragraph{Solution of Problem 17} Let $X_1, X_2,\ldots, X_n$ be independent random variables, each of which follows the uniform distribution over $[0,1]$. Then, we only need to prove that:
+\[\lim_{n\rightarrow\infty} \mathbb{E} f\left(\frac{X_1+X_2+\ldots+X_n}{n}\right)=f(1/2).\]
+
+As we know that:
+\[P\left(\left|\frac{X_1+X_2+\ldots+X_n}{n}-\frac12\right|>\varepsilon\right)\leqslant \frac{1}{\varepsilon^2}V\left(\frac{X_1+X_2+\ldots+X_n}{n}\right)=\frac{1}{12\varepsilon^2 n}.\]
+Since $f$ is continuous function, $f$ is bounded on the closed interval $[0,1]$, which means there exists $L>0$ such that $|f(x)-f(1/2)|<L$ holds for $\forall x\in [0,1]$. Also, $f$ is continuous at $1/2$. Therefore, for $\forall \varepsilon > 0$, there exists $\delta > 0$ such that $|x-1/2|<\delta\Rightarrow |f(x)-f(1/2)|<\varepsilon$. Then:
+\[P\left(\left|f\left(\frac{X_1+X_2+\ldots+X_n}{n}\right)-f(1/2)\right|>\varepsilon\right)\leqslant P\left(\left|\frac{X_1+X_2+\ldots+X_n}{n}-\frac12\right|>\delta\right)\leqslant \frac{1}{12\delta^2 n},\]
+which leads to:
+\[\left|\mathbb{E}f\left(\frac{X_1+X_2+\ldots+X_n}{n}\right) -f(1/2)\right|\leqslant \varepsilon + \frac{L}{12\delta^2 n}.\]
+Let $n\rightarrow\infty$:
+\[\lim_{n\rightarrow\infty}\left|\mathbb{E}f\left(\frac{X_1+X_2+\ldots+X_n}{n}\right)-f(1/2)\right|\leqslant \varepsilon.\]
+Since $\varepsilon$ can be any positive real number, we can finally conclude that:
+\[\lim_{n\rightarrow\infty}f\left(\frac{X_1+X_2+\ldots+X_n}{n}\right)=f(1/2).\]
+
+\paragraph{Problem 18} Prove that:\\
+(1) $\mathbb{E}[\mathbb{E}[X|\mathcal V]]=\mathbb{E}[X]$.\\
+(2) $\mathbb{E}[X] = \mathbb{E}[X|\mathcal W]$, where $\mathcal W = \{\emptyset, \Omega\}$ is the trivial $\sigma$-algebra. 
+
+\paragraph{Solution of Problem 18} According to the definition of conditional expectation, we know that $\mathbb{E}[X|\mathcal V]$ is a random variable on $\Omega$ such that $\mathbb{E}[X|\mathcal V]$ is $\mathcal V$-measurable and $\int_A XdP = \int_A \mathbb{E}[X|\mathcal V]dP$ for all $A\in\mathcal V$.\\
+(1) $\mathbb{E}[\mathbb{E}[X|\mathcal V]] = \int \mathbb{E}[X|\mathcal V] d\mu = \int Xd\mu = \mathbb{E}[X]$.\\
+(2) Since $\mathcal W=\{\emptyset, \Omega\}$ is the trivial $\sigma$-algebra, and random variable $\mathbb{E}[X|\mathcal W]$ is $\mathcal W$-measurable, which means $\mathbb{E}[X|\mathcal W]$ is a constant variable. By the conclusion of (1), we have:
+\[\mathbb{E}[X|\mathcal W]=\mathbb{E}[X],\]
+which comes to our conclusion. 
+
+
+\paragraph{Problem 19} Let $X,Y$ be two real-valued random variables and suppose their joint distribution function has the density $f(x,y)$. Show that 
+\[\mathbb{E}[X|Y]=\Phi(Y)~~a.s.\]
+for
+\[\Phi(y)=\frac{\int_{-\infty}^{\infty}xf(x,y)dx}{\int_{-\infty}^{\infty}f(x,y)dx}.\]
+
+\paragraph{Solution of Problem 19} According to the definition of conditional expectation, we know that: for all $A\in\mathcal U(Y)$,
+\[\int_A XdP=\int_A \mathbb{E}[X|Y] dP = \int_A \Phi(Y)dP.\]
+For any Borel subset of $\mathbb{R}$, denoted by $B$, let $A=\{Y\in B\}\in \mathcal U(Y)$:
+\[\int_A XdP=\int_{\omega}\chi_B(Y)XdP=\int_{-\infty}^{\infty}\int_B xf(x,y)dydx.\]
+\[\int_A \Phi(Y)dP = \int_{-\infty}^{\infty} \int_B \Phi(y)f(x,y)dydx.\]
+After switching the order of integrals, we know that:
+\[\int_{-\infty}^{\infty}xf(x,y)dx = \int_{-\infty}^{\infty}\Phi(y)f(x,y)dx = \Phi(y)\int_{-\infty}^{\infty}f(x,y)dx.\]
+It directly leads to
+\[\Phi(y) = \frac{\int_{-\infty}^{\infty}xf(x,y)dx}{\int_{-\infty}^{\infty}f(x,y)dx},\]
+which comes to our conclusion.  
+
+\paragraph{Problem 20} A smooth function $\Phi:\mathbb{R}\rightarrow\mathbb{R}$ is called convex if $\Phi''(x)\geqslant 0$ for all $x\in\mathbb{R}$.\\
+(1) Show that if $\Phi$ is convex, then:
+\[\Phi(y)\geqslant \Phi(x)+\Phi'(x)(y-x)~~~\text{for all }x,y\in\mathbb{R}.\]
+(2) Show that 
+\[\Phi\left(\frac{x+y}{2}\right)\leqslant \frac12\Phi(x)+\frac12\Phi(y)~~~\text{for all }x,y\in\mathbb{R}.\]
+(3) A smooth function $\Phi:\mathbb{R}^n\rightarrow\mathbb{R}$ is called convex if the matrix $D^2\Phi=((\Phi_{x_i x_j}))$ is nonnegative definite for all $x\in\mathbb{R}^n$. (This means that $\sum_{i,j=1}^n \Phi_{x_i x_j}\xi_i\xi_j\geqslant 0$ for all $\xi\in\mathbb{R}^n$.) Prove that 
+\[\Phi(y)\geqslant \Phi(x)+D\Phi(x)\cdot (y-x),\]
+\[\Phi\left(\frac{x+y}{2}\right)\leqslant \frac12\Phi(x)+\frac12\Phi(y)\]
+for all $x,y\in\mathbb{R}^n$.
+
+\paragraph{Solution of Problem 20} ~\\
+(1) Notice that, by using Lagrangian Theorem
+\[\Phi(y)-\Phi(x) = \Phi'(x')(y-x)\]
+holds for some $x'=x+t(y-x)~(t\in[0,1])$. Then:
+\[\Phi(y)-\Phi(x)-\Phi'(x)(y-x)=(y-x)(\Phi'(x')-\Phi(x))=(y-x)(x'-x)\Phi''(x'')=t(y-x)^2\Phi''(x'').\]
+Since $t\geqslant 0$ and $\Phi''(x'')\geqslant 0$, we can conclude that:
+\[\Phi(y)\geqslant \Phi(x)+\Phi'(x)(y-x).\]
+(2) By using Lagrangian Theorem, there exists $t_1, t_2 \in[0,1/2]$, such that:
+\[\Phi\left(\frac{x+y}{2}\right)-\Phi(x)=\Phi'(x+t_1(y-x))\cdot\frac{y-x}{2},\]
+\[\Phi(y)-\Phi\left(\frac{x+y}{2}\right) = \Phi'(y-t_2(y-x))\cdot\frac{y-x}{2}.\]
+Therefore, we have:
+\begin{equation*}
+\begin{aligned}
+&\frac12\Phi(x)+\frac12\Phi(y)-\Phi\left(\frac{x+y}{2}\right) = \frac{y-x}{4}\cdot \left[\Phi'(y-t_2(y-x))-\Phi'(x+t_1(y-x))\right]\\
+&=\frac{(1-t_1-t_2)(y-x)^2}{4}\cdot\Phi''(x'')\geqslant 0,
+\end{aligned}
+\end{equation*}
+since $1-t_1-t_2\geqslant 0$ and $\Phi''(x'')\geqslant 0$, which comes to our conclusion.
+
+~\\
+(3) Notice that:
+\begin{equation*}
+\begin{aligned}
+&\Phi(y)-\Phi(x)-D\Phi(x)\cdot(y-x) = \int_0^1 \langle D\Phi(x+t(y-x)), y-x\rangle dt - D\Phi(x)\cdot(y-x)\\
+=& \int_0^1 \langle D\Phi(x+t(y-x))- D\Phi(x), y-x\rangle dt =\int_0^1 dt\int_0^t (y-x)^{\top} D^2\Phi(x+t'(y-x))\cdot (y-x)dt'\geqslant 0,
+\end{aligned}    
+\end{equation*}
+which comes to our conclusion. Then, by using this inequality, we have:
+\[\Phi(x)-\Phi\left(\frac{x+y}{2}\right)\geqslant -D\Phi\left(\frac{x+y}{2}\right)\cdot\frac{y-x}{2},\]
+\[\Phi(y)-\Phi\left(\frac{x+y}{2}\right)\geqslant D\Phi\left(\frac{x+y}{2}\right)\cdot\frac{y-x}{2}.\]
+After adding them up, we obtain that:
+\[\Phi\left(\frac{x+y}{2}\right)\leqslant \frac12\Phi(x)+\frac12\Phi(y).\]
+
+\paragraph{Problem 21} ~\\
+(1) Prove Jensen's Inequality:
+\[\Phi(\mathbb{E}X)\leqslant \mathbb{E}(\Phi(X)),\]
+for a random variable $X:\Omega\rightarrow\mathbb{R}$, where $\Phi$ is convex. (Hint: Use assertion (3) from the previous exercise.)\\
+(2) Prove the conditional Jensen Inequality:
+\[\Phi(\mathbb{E}(X|\mathcal V))\leqslant \mathbb{E}(\Phi(X)|\mathcal V).\]
+
+\paragraph{Solution of Problem 21}~\\
+(1) According to the assertion (3) of the previous exercise, we have:
+\[\Phi(X)-\Phi(\mathbb{E}(X))\geqslant D\Phi(\mathbb{E}(X))\cdot(X-\mathbb{E}X).\]
+Therefore, after taking the expectation, it holds that:
+\[\mathbb{E}\Phi(X)-\Phi(\mathbb{E}(X))\geqslant D\Phi(\mathbb{E}(X))\cdot \mathbb{E}\left(X-\mathbb{E}X\right) = 0,\]
+which comes to our conclusion. \\
+(2) Again by using assertion (3), we know that:
+\[\Phi(X)-\Phi(\mathbb{E}(X|\mathcal V))\geqslant D\Phi(\mathbb{E}(X|\mathcal V))\cdot(X-\mathbb{E}(X|\mathcal V)).\]
+By taking conditional expectation $p(\cdot|\mathcal V)$:
+\[\mathbb{E}(\Phi(X)|\mathcal V)-\Phi(\mathbb{E}(X|\mathcal V))\geqslant D\Phi(\mathbb{E}(X|\mathcal V))\cdot\mathbb{E}\left(X-\mathbb{E}(X|\mathcal V)|\mathcal V\right)=0,\]
+which comes to our conclusion.
+
+
+
+
+\paragraph{Problem 22} Let $W(\cdot)$ be a one-dimensional Brownian motion. Show that
+\[\mathbb{E}[W^{2k}(t)]=\frac{(2k)!t^k}{2^k k!}~~(t>0).\]
+
+\paragraph{Solution of Problem 22} According to the property of Brownian motions, $W(t)\sim\mathcal N(0,t)$. Therefore:
+\[\mathbb{E}[W^{2k}(t)]=\mathbb{E}_{z\sim\mathcal N(0,1)}(\sqrt{t}z)^{2k}= t^k\cdot\mathbb{E}[z^{2k}]=t^k(2k-1)!!=\frac{(2k)!t^k}{2^k k!},\]
+which comes to our conclusion. 
+
+
+\paragraph{Problem 23} Show that if $W(\cdot)$ is an $n$-dimensional Brownian motion, then so are:\\
+(1) $W(t+s)-W(s)$ for all $s\geqslant 0$.\\
+(2) $cW(t/c^2)$ for all $c>0$. (Brownian scaling)
+
+
+\paragraph{Solution of Problem 23} ~\\
+(1) For any $k\in[n]$, $W^k(t)$ is a one-dimensional Brownian motion, then $W^k(t+s)-W^k(s)$ is a Gaussian process and 
+\[\mathbb{E}[(W^k(u+s)-W^k(s))(W^k(v+s)-W^k(s))]=\min(u+s,v+s)+s-\min(u+s,s)-\min(v+s,s)=\min(u,v),\]
+which means $W^k(t+s)-W^k(s)$ is also a one-dimensional Brownian motion. Also $\{W^k(t+s)-W^k(s)\}_{k\in[n]}$ are independent. Therefore, $W(t+s)-W(s)$ is a Brownian motion. \\
+(2) For any $k\in[n]$, $W^k(t)$ is a one-dimensional Brownian motion, then $cW^k(t/c^2)$ is a Gaussian process and 
+\[\mathbb{E}[cW(u/c^2)\cdot cW(v/c^2)]=c^2\min(u/c^2,v/c^2)=\min(u,v).\]
+So $cW^k(t/c^2)$ is a one-dimensional Brownian motion. Also $\{cW^k(t/c^2)\}_{k\in[n]}$ are independent. Therefore, $cW(t/c^2)$ is a Brownian motion.  
+
+
+\paragraph{Problem 24} Let $W(\cdot)$ be a one-dimensional Brownian motion, and define 
+\[\overline{W}(t)=\begin{cases}tW\left(\frac{1}{t}\right)~~~\mbox{for $t>0$}\\ 0 ~~~~~~~~~~~~\mbox{for $t=0$}\end{cases}.\]
+Show that $\overline{W}(t)-\overline{W}(s)$ is $\mathcal N(0,t-s)$ for times $0\leqslant s\leqslant t$. ($\overline{W}(\cdot)$ also has independent increments and so is a one-dimensional Brownian motion. You do not need to show this.)
+
+\paragraph{Solution of Problem 24} For times $0\leqslant s\leqslant t$, we know that:
+\[\overline{W}(t)-\overline{W}(s) = tW\left(\frac{1}{t}\right) - sW\left(\frac{1}{s}\right)= (t-s)W\left(\frac{1}{t}\right)-s\left(W\left(\frac{1}{s}\right)-W\left(\frac{1}{t}\right)\right).\]
+Notice that $0<\frac1t\leqslant \frac1s$, and so $W\left(\frac{1}{t}\right)$ are independent with $W\left(\frac{1}{s}\right)-W\left(\frac{1}{t}\right)$. We know that:
+\[W\left(\frac{1}{t}\right)\sim\mathcal N(0,1/t),~~W\left(\frac{1}{s}\right)-W\left(\frac{1}{t}\right)\sim\mathcal N(0, 1/s-1/t).\]
+Therefore, $\overline{W}(t)-\overline{W}(s)$ follows the zero-centered Gaussian distribution with its variance
+\[(t-s)^2\cdot\frac1t + s^2\cdot\left(\frac1s-\frac1t\right)=t-s.\]
+To sum up, we conclude that $\overline{W}(t)-\overline{W}(s)\sim\mathcal N(0,t-s)$.
+
+\paragraph{Problem 25} Define $X(t):=\int_0^t W(s)ds$, where $W(\cdot)$ is a one-dimension Brownian motion. Show that 
+\[\mathbb{E}[X^2(t)]=\frac{t^3}{3}~~~~~\text{for each }t>0.\]
+
+\paragraph{Solution of Problem 25} The Brownian motion can be written as: $W(t)=\sum_{k=0}^{+\infty} A_k s_k(t)$. Therefore:
+\[X(t)=\sum_{k=0}^{+\infty}A_k \int_0^t s_k(s)ds:=\sum_{k=0}^{+\infty}A_k U_k(t).\]
+Then, since $\{A_k\}$ are independent random variables sampled from standard Gaussian. Therefore:
+\[\mathbb{E}[X^2(t)]=\sum_{k=0}^{+\infty} U_k^2(t).\]
+Notice that:
+\begin{equation*}
+\begin{aligned}
+\sum_{k=0}^{+\infty} U_k^2(t) &= \sum_{k=0}^{+\infty}\int_0^t\int_0^t s_k(x)s_k(y)dxdy = \int_0^t\int_0^t \left[\sum_{k=0}^{+\infty}s_k(x)s_k(y)\right]dxdy\\
+&= \int_0^t\int_0^t\min(x,y)dxdy = 2\cdot\int_0^t xdx\int_x^t dy = 2\int_0^t x(t-x)dx= 2\left(\frac{t^3}{2}-\frac{t^3}{3}\right)=\frac{t^3}{3},
+\end{aligned}    
+\end{equation*}
+which comes to our conclusion.
+
+
+\paragraph{Problem 26} Define $X(t)$ as in the previous exercise. Show that 
+\[\mathbb{E}e^{\lambda X(t)}=e^{\frac{\lambda^2 t^3}{6}}~~~~\text{for each }t>0.\]
+(Hint: $X(t)$ is a Gaussian random variable, the variance of which we know from the previous exercise.)
+
+\paragraph{Solution of Problem 26} From the exercise above, we know that $X(t)=\sum_{k=0}^{+\infty}A_k U_k(t)$. Then:
+\begin{equation*}
+\begin{aligned}
+\mathbb{E}e^{\lambda X(t)}&=\prod_{k=0}^{+\infty}\mathbb{E} e^{\lambda A_k U_k(t)} = \prod_{k=0}^{+\infty}\exp\left(-\frac{\lambda^2 U_k(t)^2}{2}\right)\\
+&= \exp\left(-\frac{\lambda^2 \sum_{k=0}^{+\infty}U_k(t)^2}{2}\right) = e^{-\frac{\lambda^2 t^3}{6}}.
+\end{aligned}    
+\end{equation*}
+Here, we use the conclusion from the previous exercise. 
+
+
+
+
+\paragraph{Problem 27} Define $U(t) := e^{-t} W(e^{2t})$, where $W(\cdot)$ is a one-dimensional Brownian motion. Show that 
+\[\mathbb{E}[U(t)U(s)]=e^{-|t-s|}~~~\text{for all}~~-\infty<s,t<\infty.\]
+
+\paragraph{Solution of Problem 27} Without loss of generality, we can assume that $s\leqslant t$. Then:
+\begin{equation*}
+\begin{aligned}
+\mathbb{E}[U(t)U(s)] &= e^{-t-s}\cdot\mathbb{E}[W(e^{2t})W(e^{2s})] = e^{-t-s}\cdot\mathbb{E}\left[W(e^{2s})^2 + W(e^{2s})\cdot(W(e^{2t})-W(e^{2s}))\right]\\
+&= e^{-t-s}\cdot(e^{2s} + 0)  = e^{-t+s} = e^{-|t-s|},
+\end{aligned}    
+\end{equation*}
+which comes to our conclusion. Here, we use the fact that $W(x)\sim\mathcal N(0,x)$ for all $x\geqslant 0$ and $W(x)-W(y)\sim \mathcal N(0,x-y)$ for all $0<y<x$ which is independent of $W(y)$. 
+
+\paragraph{Problem 28} Let $W(\cdot)$ be a one-dimensional Brownian motion. Show that 
+\[\lim_{m\rightarrow\infty}\frac{W(m)}{m}=0~~~\text{almost surely.}\]
+(Hint: Fix $\varepsilon > 0$ and define the event $A_m:=\left\{\left|\frac{W(m)}{m}\right|\geqslant \varepsilon\right\}$. Then $A_m=\{|X|\geqslant \sqrt{m}\varepsilon\}$ for the $\mathcal N(0,1)$ random variable $X=\frac{W(m)}{\sqrt{m}}$. Apply the Borel-Cantelli Lemma.)
+
+\paragraph{Solution of Problem 28} Notice that, the event $\left\{\lim_{m\rightarrow\infty}\frac{W(m)}{m}\neq 0\right\}$ is equivalent to the event that there exists $\delta>0$ such that there are infinitely many $m$-s satisfy $\left|\frac{W(m)}{m}\right|>\delta$, which means:
+\[E := \left\{\lim_{m\rightarrow\infty}\frac{W(m)}{m}\neq 0\right\} = \lim_{k\rightarrow\infty}E_k\]
+where 
+\[E_k = \left\{\text{There are infinitely many }m\text{-s satisfy }\left|\frac{W(m)}{m}\right|>\frac1k\right\}.\]
+Notice that
+\[E_k = \lim\sup_{m\rightarrow\infty}\left\{\left|\frac{W(m)}{m}\right|>\frac1k\right\}.\]
+According to the fact that $W(m)\sim\mathcal N(0,m)$, we have:
+\[P\left(\left|\frac{W(m)}{m}\right|>\frac1k\right)=P\left(\left|\frac{W(m)}{\sqrt{m}}\right|>\frac{\sqrt{m}}{k}\right) = \widetilde{\Phi}\left(\frac{\sqrt{m}}{k}\right)\leqslant \exp\left(-\frac{m}{2k^2}\right).\]
+Then their sum:
+\[\sum_{m=1}^{\infty}P\left(\left|\frac{W(m)}{m}\right|>\frac1k\right)\leqslant \sum_{m=1}^{\infty}\exp\left(-\frac{m}{2k^2}\right) = \frac{1}{1-\exp(-1/2k^2)},\]
+which means the infinite sum actually converges. By using Borel-Cantelli Lemma, we know that:
+\[P(E_k)=\left(\lim\sup_{m\rightarrow\infty}\left\{\left|\frac{W(m)}{m}\right|>\frac1k\right\}\right)=0,\]
+and then:
+\[P(E)=\lim_{k\rightarrow\infty}P(E_k)=0~~~\Rightarrow~~P(\overline{E})=1,\]
+which comes to our conclusion.
+
+
+\paragraph{Problem 29} (1) Let $0<\gamma\leqslant 1$. Show that $f:[0,T]\rightarrow \mathbb{R}^n$ is uniformly Holder continuous with exponent $\gamma$, it is also uniformly Holder continuous with each exponent $0<\delta<\gamma$. \\
+(2) Show that $f(t)=t^{\gamma}$ is uniformly Holder continuous with exponent $\gamma$ on the interval $[0,1]$.
+
+\paragraph{Solution of Problem 29} (1) Since $f$ is uniformly Holder continuous with exponent $\gamma$, we have:
+\[\|f(x)-f(y)\|\leqslant K |x-y|^{\gamma}\]
+holds for $\forall x,y\in[0,T]$ and a constant $K$. Then if $|x-y|\leqslant 1$, we have: $|x-y|^{\gamma}\leqslant |x-y|^{\delta}$, which directly leads to
+\[\|f(x)-f(y)\|\leqslant K |x-y|^{\delta}.\]
+If $|x-y|>1$, we have: $|x-y|^{\gamma}=|x-y|^{\gamma-\delta}\cdot|x-y|^{\delta}\leqslant T^{\gamma-\delta}\cdot |x-y|^{\delta}$. To sum up, for $\forall x,y\in[0,T]$, it holds that:
+\[\|f(x)-f(y)\|\leqslant K\max(1,T^{\gamma-\delta}) |x-y|^{\delta},\]
+which comes to our conclusion.\\
+
+(2) We only need to prove that for $\forall x,y\in[0,1]$, it uniformly holds that:
+\[|x^{\gamma}-y^{\gamma}|<K|x-y|^{\gamma}\]
+for some constant $K$. Without loss of generality, we can assume that $0\leqslant y\leqslant x\leqslant 1$. Let $\delta = x-y$, then we need to prove that:
+\[g(y):=(y+\delta)^{\gamma}-y^{\gamma} < K \delta^{\gamma}\]
+for some constant $K$. Since $\gamma\in(0,1]$, we have:
+\[g'(y)=\gamma\cdot\left((y+\delta)^{\gamma-1}-y^{\gamma-1}\right)\leqslant 0.\]
+It means $g$ is a decreasing function. Therefore:
+\[g(y)\leqslant g(0) = \delta^{\gamma}\]
+holds for $\forall y$. We can make $K=2$ and it comes to our conclusion.
+
+
+\paragraph{Problem 30} Let $0<\gamma<\frac12$. We showed in Chapter 3 that if $W(\cdot)$ is a one-dimensional Brownian motion, then for almost every $\omega$ there exists a constant $K$, depending on $\omega$, such that 
+\[|W(t,\omega)-W(s,\omega)|\leqslant K|t-s|^{\gamma}~~~\text{for all }0\leqslant s,t\leqslant 1.\]
+Show that there does not exist a constant $K$ such that it holds for almost all $\omega$. 
+
+\paragraph{Solution of Problem 30} Assume there exists a constant $K$ such that if holds for almost all $\omega$. Then:
+\begin{equation*}
+\begin{aligned}
+1&=\mathbb{P}_{\omega}\left[|W(t,\omega)-W(s,\omega)|\leqslant K|t-s|^{\gamma}~~\forall 0\leqslant s,t\leqslant 1\right] \leqslant \mathbb{P}_{\omega}\left[|W(1,\omega)-W(0,\omega)|\leqslant K\right]\\
+&= \mathbb{P}_{\omega}\left[|W(1,\omega)|\leqslant K\right] = 1-2\widetilde{\phi}(K).
+\end{aligned}    
+\end{equation*}
+which leads to a contradiction. 
+
+\paragraph{Problem 31} Prove that if $G,H\in\mathbb{L}^2(0,T)$, then:
+\[\mathbb{E}\left(\int_0^T GdW \int_0^T HdW\right) = \mathbb{E}\left(\int_0^T GHdt\right).\]
+(Hint: $2ab=(a+b)^2-a^2-b^2$.)
+
+\paragraph{Solution of Problem 31} Notice that:
+\[\mathbb{E}\left(\int_0^T GdW +\int_0^T HdW\right)^2 = \|G+H\|_2^2, ~\mathbb{E}\left(\int_0^T GdW\right)^2 = \|G\|_2^2, ~\mathbb{E}\left(\int_0^T HdW\right)^2 = \|H\|_2^2.\]
+Therefore: we have 
+\[\mathbb{E}\left(\int_0^T GdW \int_0^T HdW\right) = \frac{1}{2}\left(\|G+H\|_2^2-\|G\|_2^2-\|H\|_2^2\right)=\langle G,H\rangle=\int_0^T GHdt,\]
+which comes to our conclusion. 
+
+\paragraph{Problem 32} Let $(\Omega, \mathcal U, P)$ be a probability space, and take $\mathcal F(\cdot)$ to be a filtration of $\sigma$-algebras. Assume $X$ to be an integrable random variable, and define $X(t):=\mathbb{E}[X|\mathcal F(t)]$ for times $t\geqslant 0$. Show that $X(\cdot)$ is a martingale. 
+
+\paragraph{Solution of Problem 32} According to the definition of martingale, we know that $\mathcal F(t)\supseteq \mathcal F(s)$ when $t>s$. So for $\forall t>s$, it holds that:
+\[\mathbb{E}[X(t)|\mathcal F(s)]=\mathbb{E}[\mathbb{E}[X|\mathcal F(t)]|\mathcal F(s)] = \mathbb{E}[X|\mathcal F(t)\cap \mathcal F(s)]=\mathbb{E}[X|\mathcal F(s)]=X(s),\]
+which shows us that $\{X(t)\}$ is a martingale. 
+
+\paragraph{Problem 33} Show directly that $I(t):=W^2(t)-t$ is a martingale. \\
+(Hint: $W^2(t)=(W(t)-W(s))^2-W^2(s)+2W(t)W(s)$. Take the conditional expectation with respect to $\mathcal W(S)$, the history of $W(\cdot)$, and then condition with respect to the history of $I(\cdot)$.)
+
+\paragraph{Solution of Problem 33} Notice that $W^2(t)=(W(t)-W(s))^2-W^2(s)+2W(t)W(s)$, then:
+\[\mathbb{E}[W^2(t)-t|\mathcal W(s)] = (t-s)+W^2(s)-t = W^2(s)-s,\]
+holds for $\forall t>s$, which means $\mathbb{E}[I(t)|\mathcal W(s)]=I(s)$. Then, we need to take condition with respect to the history of $I(\cdot)$. Since the conditional expectation above only depends on $W^2(s)$, so:
+\[\mathbb{E}[W^2(t)-t|\mathcal W^2(s)] = W^2(s)-s,\]
+which leads to:
+\[\mathbb{E}[I(t)|\mathcal I(s)] = I(s).\]
+It shows us that $I(t)$ is a martingale. 
+
+\paragraph{Problem 34} Suppose $X(\cdot)$ is a real-valued martingale and $\Phi:\mathbb{R}\rightarrow\mathbb{R}$ is convex. Assume also that $\mathbb{E}(|\Phi(X(t))|)<\infty$ for all $t\geqslant 0$. Show that $\Phi(X(\cdot))$ is a submartingale. (Hint: Use the conditional Jensen Inequality.)
+
+\paragraph{Solution of Problem 34} Since $X(\cdot)$ is a real-valued martingale, we have: for $\forall t>s$
+\[\mathbb{E}(X(t))|\mathcal F(s))=X(s).\]
+Then, by using conditional Jensen Inequality, we have:
+\[\mathbb{E}(\Phi(X(t))|\mathcal F(s))\geqslant \Phi(\mathbb{E}(X(t)|\mathcal F(s)))=\Phi(X(s)).\]
+Therefore, $\Phi(X(\cdot))$ is a submartingale.
+
+\paragraph{Problem 35} Use the Itô chain rule to show that $Y(t):=e^{\frac{t}{2}}\cos(W(t))$ is a martingale.
+
+\paragraph{Solution of Problem 35} By using the Itô chain rule, let $X(t) = W(t)$, we know that: $dX(t)= dW(t)$. Then: $dY(t)=d u(X,t)$ where $u(X,t)=e^{t/2}\cos X$. Therefore,
+\begin{equation*}
+\begin{aligned}
+dY(t)&=du(X,t)=(u_t+\frac12 u_{xx})dt + u_x dW = \left(\frac12 e^{t/2}\cos X-\frac12 e^{t/2}\cos X\right)dt-e^{t/2}\sin W(t)dW\\
+&= -e^{t/2}\sin W(t)dW,
+\end{aligned}    
+\end{equation*}
+which shows us that $Y(t)$ is a martingale.
+
+
+\paragraph{Problem 36} Let $\mathbf{W}(\cdot)=(W^1, \ldots, W^n)$ be an $n$-dimensional Brownian motion, and write $Y(t):=|\mathbf{W}(t)|^2-nt$ for times $t\geqslant 0$. Show that $Y(\cdot)$ is a martingale. (Hint: Compute $dY$.)
+
+\paragraph{Solution of Problem 36} We are going to compute $dY(t)$. Since $dW^2 = 2WdW+ dt$, so it's easy for us to compute that:
+\[dY(t) = \sum_{i=1}^{N} d(W^i(t))^2 - ndt = \sum_{i=1}^{N} \left[2W^i(t) dW^i(t) + dt\right]-ndt = \sum_{i=1}^{N} 2W^i(t) dW^i(t),\]
+which shows us that $Y(t)$ is a martingale.
+
+\paragraph{Problem 37} Show that
+\[\int_0^T W^2dW = \frac13 W^3(T)-\int_0^T Wdt\]
+and 
+\[\int_0^T W^3 dW = \frac14 W^4(T) - \frac32 \int_0^T W^2dt.\]
+
+\paragraph{Solution of Problem 37}~\\
+(1) By using the Itô's chain rule, we know that:
+\[dW^3 = 3W^2 dW + 3W dt.\]
+Therefore:
+\[W^3(T)=\int_0^T dW^3(t) = 3\int_0^T W^2 dW + 3\int_0^T Wdt~~\Rightarrow~~\int_0^T W^2 dW=\frac13 W^3(T)-\int_0^T Wdt,\]
+which comes to our conclusion.\\
+
+(2) Again by using the Itô's chain rule, we know that:
+\[dW^4 = 4W^3 dW + 6W^2 dt.\]
+Therefore:
+\[W^4(T)=\int_0^T dW^4(t) = 4\int_0^T W^3 dW + 6\int_0^T W^2 dt~~\Rightarrow~~\int_0^T W^3 dW=\frac14 W^4(T)-\frac32 \int_0^T W^2 dt,\]
+which comes to our conclusion. 
+
+
+\paragraph{Problem 38} Recall from the text that 
+\[Y := e^{\int_0^t gdW - \frac12 \int_0^t g^2 ds}\]
+satisfies 
+\[dY = gYdW.\]
+Use this to prove 
+\[\mathbb{E}\left(e^{\int_0^T gdW}\right)=e^{\frac12 \int_0^T g^2 ds}.\]
+
+
+\paragraph{Solution of Problem 38} Define $F = \int_0^t gdW - \frac12 \int_0^t g^2 ds$, then we know that:
+\[dF = - \frac12 g^2 dt + gdW.\]
+Since $Y=e^F$, we have:
+\[dY = e^F dF + \frac12 e^F g^2dt = e^F gdW = gY dW.\]
+Then, we can conclude that $Y(t)$ is a martingale, which leads to the fact that:
+\[\mathbb{E}Y(t)=\mathbb{E}Y(0)=1~~\Rightarrow~~\mathbb{E}\left(e^{\int_0^T gdW}\right)=e^{\frac12 \int_0^T g^2 ds}.\]
+
+
+\paragraph{Problem 39} Let $u=u(x,t)$ be a smooth solution of the backwards diffusion equation
+\[u_t+\frac12 u_{xx}=0,\]
+and suppose $W(\cdot)$ is a one-dimensional Brownian motion. Show that for each time $t>0$
+\[\mathbb{E}(u(W(t),t)) = u(0,0).\]
+
+
+\paragraph{Solution of Problem 39} Let $Y(t) = u(W(t),t)$. By using Itô's chain rule, we know that:
+\[dY = u_x dW + u_t dt +\frac12 u_{xx} dt = u_x dW + (u_t+\frac12 u_{xx})dt = u_x dW.\]
+Therefore, $Y(t)$ is a martingale, which leads to:
+\[\mathbb{E} u(W(t),t)=\mathbb{E} Y(t) = Y(0)=u(0,0).\]
+
+
+\paragraph{Problem 40} Calculate $\mathbb{E}(B^2(t))$ for the Brownian bridge $B(\cdot)$, and show in particular that $\mathbb{E}(B^2(t))\rightarrow 0$ as $t\rightarrow 1^{-}$.
+
+\paragraph{Solution of Problem 40} We have already known that the Brownian bridge has the following formulation:
+\[B(t)=(1-t)\int_0^t\frac{1}{1-s}dW(s).\]
+Then, we can obtain that:
+\[\mathbb{E}[B^2(t)]=(1-t)^2\cdot\int_0^t\frac{1}{(1-s)^2}ds = (1-t)^2\cdot\left(\frac{1}{1-t}-1\right)=t(1-t).\]
+Furthermore, it's obvious to verify that when $t\rightarrow 1^-$, $\mathbb{E}[B^2(t)]=t(1-t)\rightarrow 0$, which comes to our conclusion. 
+
+\paragraph{Problem 41} Let $X$ solve the Langevin equation, and suppose that $X_0$ is an $\mathcal N(0,\frac{\sigma^2}{2b})$ random variable. Show that 
+\[\mathbb{E}[X(s)X(t)]=\frac{\sigma^2}{2b}e^{-b|t-s|}.\]
+
+
+\paragraph{Solution of Problem 41} According to the formulation of the solution for the Langevin equation, we have:
+\[X(t) = e^{-bt}X_0+\sigma\int_0^t e^{-b(t-c)}dW(c),~~X(s) = e^{-bs}X_0+\sigma\int_0^s e^{-b(s-c)}dW(c).\]
+Without loss of generality, we assume that $t>s$, then:
+\[\mathbb{E}[X(t)X(s)]=e^{-b(t+s)}\mathbb{E}X_0^2 + \sigma^2\cdot\mathbb{E}\left[\int_0^t e^{-b(t-c)}dW(c)\cdot \int_0^s e^{-b(s-c)}dW(c)\right]\]
+since the other two terms have expectation 0. Then:
+\begin{equation*}
+\begin{aligned}
+&\mathbb{E}\left[\int_0^t e^{-b(t-c)}dW(c)\cdot \int_0^s e^{-b(s-c)}dW(c)\right] \\
+&= \mathbb{E} \left[\int_0^s e^{-b(t-c)}dW(c)\cdot \int_0^s e^{-b(s-c)}dW(c) + \int_s^t e^{-b(t-c)}dW(c)\cdot \int_0^s e^{-b(s-c)}dW(c)\right]\\
+&= \int_0^s e^{-b(t+s-2c)}dc + 0 = \frac{e^{-b(t-s)}-e^{-b(t+s)}}{2b}.
+\end{aligned}    
+\end{equation*}
+Also, $\mathbb{E}X_0^2 = \frac{\sigma^2}{2b}$. To sum up, we finally obtain that:
+\[\mathbb{E}[X(s)X(t)]= \frac{\sigma^2}{2b}e^{-b(t-s)}= \frac{\sigma^2}{2b}e^{-b|t-s|}.\]
+
+
+
+\paragraph{Problem 42} (1) Consider the ODE
+\begin{equation*}
+\begin{cases}
+\dot{x} &= x^2~~~(t>0)\\
+x(0) &= x_0.
+\end{cases}    
+\end{equation*}
+Show that if $x_0 > 0$, the solution "blows up to infinity" in finite time.
+
+~\\
+(2) Next, look at the ODE
+\begin{equation*}
+\begin{cases}
+\dot{x} &= x^{1/2}~~~(t>0)\\
+x(0) &= 0.
+\end{cases}    
+\end{equation*}
+Show that this problem has infinitely many nonnegative solutions. \\
+(Hint: $x\equiv 0$ is a solution. Find also a solution which is positive for times $t>0$, and then combine these solutions to find ones which are zero for some time and then become positive.)
+
+\paragraph{Solution of Problem 42} ~\\
+(1) Notice that $\dot{x}=x^2\geqslant 0$, which means $x(t)$ is a monotonic function and therefore $x(t)\geqslant x(0)=x_0 > 0$ holds for all $t\geqslant 0$. Since:
+\[\frac{dx}{dt}=x^2~~\Rightarrow~~\frac{dx}{x^2}=dt~~\int_{0}^T \frac{dx(t)}{x(t)^2}=T,\]
+where we used $x(t)> 0$. Then we have:
+\[\frac{1}{x_0}-\frac{1}{x(T)}=T~~\Rightarrow~~x(T)=\frac{x_0}{1-Tx_0}\]
+holds for all $T > 0$. Therefore, this solution blows up to infinity at $T=\frac{1}{x_0}$, which is a finite time. 
+
+~\\
+(2) Consider the following functions:
+\[x_{s}(t)=\begin{cases}&0~~~\mbox{when $0\leqslant t \leqslant s$}\\ &\frac{(t-s)^2}{2}~~~\mbox{when $t>s$}\end{cases}.\]
+Here $s > 0$. Then, we notice that for $\forall s >0$, function $x_s(t)$ satisfies the given ODE, and it is non-negative, which comes to our conclusion. 
+
+
+
+\paragraph{Problem 43} (1) Use the substitution $X=u(W)$ to solve the SDE
+\[\begin{cases}dX&=-\frac12 e^{-2X}dt+e^{-X}dW\\ X(0)&=x_0\end{cases}.\]
+
+~\\
+(2) Show that the solution blows up at a finite, random time. 
+
+\paragraph{Solution of Problem 43} ~\\
+(1) We use the substitution $X=u(W)$, then:
+\[dX = u'(W(t))dW(t) + \frac12 u''(W(t))dt.\]
+We need: 
+\[u' = e^{-u}, u''=-e^{-2u}, u(0)=x_0.\]
+Then $u(t)=\ln(t+e^{x_0})$. To sum up, the solution of the SDE is:
+\[X(t)=\ln(W(t)+e^{x_0}).\]
+
+(2) The blowup time is the following stopping time $\tau = \min\{t : W(t) = -e^{x_0}\}$. For any positive integer $n$, define the event $E_n := \{\tau\geqslant n\}$. Then: by using Reflection Theorem, we know that:
+\[\mathbb{P}\{E_n\} = \mathbb{P}\{|W(n)| < e^{x_0}\}=2\Phi\left(\frac{e^{x_0}}{\sqrt{n}}\right).\]
+Also, it is obvious that $E_1 \supseteq E_2 \supseteq \ldots$, and when $n\rightarrow \infty$, we have:
+\[\lim_{n\rightarrow\infty}\mathbb{P}\{E_n\}=0,\]
+which means:
+\[0=\mathbb{P}\left\{\lim_{n\rightarrow\infty}E_n\right\}=\mathbb{P}\{E\}\]
+where $E:=\{\tau=+\infty\}$. It means the solution blows up at time $\tau$, which is a random time. With probability 1, this time is finite. 
+
+
+
+\paragraph{Problem 44} Solve the SDE $dX=-Xdt+e^{-t}dW$.
+
+\paragraph{Solution of Problem 44} We use the substitution $X=e^{-t}W(t)+f(t)$, then:
+\[dX = -e^{-t}W(t)dt+e^{-t}dW(t) + f'(t)dt = e^{-t}dW(t) + (-e^{-t}W(t)+f'(t))dt.\]
+Now we just need $f(t)=-f'(t)~\Rightarrow~ f(t)=Ae^{-t}$. To sum up, the solution of the SDE is:
+\[X = e^{-t}W(t)+Ae^{-t},\]
+where $A=X(0)$ can be any real constant. 
+
+
+
+\paragraph{Problem 45} Let $\mathbf{W}=(W^1,W^2,\ldots, W^n)$ be an $n$-dimensional Brownian motion and write 
+\[R := |\mathbf{W}|=\left(\sum_{i=1}^{n}(W^i)^2\right)^{1/2}.\]
+Show that $R$ solves the stochastic Bessel equation
+\[dR=\frac{n-1}{2R}dt+\sum_{i=1}^{n}\frac{W^i}{R}dW^i.\]
+
+\paragraph{Solution of Problem 45} Denote function  $F:\mathbb{R}^n\rightarrow\mathbb{R}$ as $F(x):= \|x\|_2$. Then:
+\[F_k'(x)=\frac{x_k}{\|x\|_2},~~F_{kk}''(x)=\frac{\|x\|_2^2-x_k^2}{\|x\|_2^3}.\]
+According to Itô's chain rule, it holds that:
+\[dR = \frac{1}{R}\sum_{i=1}^{n} W^i dW^i + \frac{1}{2R^3}\sum_{i=1}^{n}(R^2-x_k^2) dt = \sum_{i=1}^{n}\frac{W^i}{R}dW^i + \frac{nR^2-R^2}{2R^3}dt = \frac{n-1}{2R}dt+\sum_{i=1}^{n}\frac{W^i}{R}dW^i,\]
+which comes to our conclusion.
+
+\paragraph{Problem 46} (1) Show that $\mathbf{X}=(\cos(W),\sin(W))$ solves the system of SDE
+\[\begin{cases}dX^1&=-\frac12 X^1dt-X^2dW\\ dX^2&=-\frac12 X^2 dt+X^1 dW\end{cases}.\]
+(2) Show also that if $\mathbf{X}=(X^1,X^2)$ is any other solution, then $|\mathbf{X}|$ is constant in time.
+
+\paragraph{Solution of Problem 46} ~\\
+(1) We only need to verify the SDE solution. 
+\[dX^1 = d\cos(W) = -\sin(W) dW -\frac12 \cos(W) dt = -X^2 dW -\frac12 X^1 dt.\]
+\[dX^2 = d\sin(W) = \cos(W) dW -\frac12 \sin(W) dt = X^1 dW - \frac12 X^2 dt.\]
+(2) Denote $F = (X^1)^2 + (X^2)^2$, then:
+\begin{equation*}
+\begin{aligned}
+dF &= 2X^1 dX^1 + (X^2)^2 dt + 2X^2 dX^2 + (X^1)^2 dt\\
+&= 2X^1(-X^2 dW -\frac12 X^1 dt) + 2X^2(X^1 dW - \frac12 X^2 dt) + Fdt \\
+&= -Fdt + Fdt = 0
+\end{aligned}    
+\end{equation*}
+Therefore, $F=|\mathbf{X}|^2$ is constant in time, which leads to the fact that $|\mathbf{X}|$ is also constant in time. 
+
+\paragraph{Problem 47} Solve the system 
+\[\begin{cases} dX^1 &= dt+dW^1\\ dX^2 &= X^1 dW^2,\end{cases}\]
+where $\mathbf{W}=(W^1, W^2)$ is a Brownian motion. 
+
+\paragraph{Solution of Problem 47} From the first equation, we easily know that 
+\[X^1 = t+W^1(t)+c_1\]
+where $c_1$ can be any real constant. Then, $X^2$ satisfies:
+\[dX^2 = (t+c_1+W^1(t))dW^2.\]
+We can simply write down the following formulation:
+\[X^2 = c_1W^2(t) + c_2 + \int_{0}^t (s+W^1(s))dW^2(s).\]
+To sum up, the solution of the SDE is:
+\begin{equation*}
+\begin{cases}
+X^1 &= t+W^1(t)+c_1\\
+X^2 &= c_1 W^2(t) + c_2 + \int_0^t (s+W^1(s))dW^2(s).
+\end{cases}    
+\end{equation*}
+
+\paragraph{Problem 48} Solve
+\begin{equation*}
+\begin{cases}
+dX^1 &= X^2 dt + dW^1\\
+dX^2 &= X^1 dt + dW^2.
+\end{cases}    
+\end{equation*}
+
+
+\paragraph{Solution of Problem 48} Denote $W_1 := \frac{W^1+W^2}{\sqrt{2}}, W_2 := \frac{W^1-W^2}{\sqrt{2}}$. Also, we denote $X=X_1+X_2, Y=X_1-X_2$. Then, $\{W_1(t)\}, \{W_2(t)\}$ are Brownian motions. After adding the two equations above, we obtain that:
+\[dX = Xdt + \sqrt{2}dW_1,\]
+which is a Langevin equation. The solution is:
+\[X = e^t\left(c_1 + \sqrt{2}\int_0^t e^{-s}dW_1(s)\right)= e^t\left(c_1 + \int_0^t e^{-s}dW^1(s)+\int_0^t e^{-s}dW^2(s)\right).\]
+Similarly, after subtracting the two equations above, we obtain that:
+\[dY = -Ydt + \sqrt{2}dW_2,\]
+which is also a Langevin equation. The solution is:
+\[Y = e^{-t}\left(c_2 + \sqrt{2}\int_0^t e^{s}dW_2(s)\right)= e^{-t}\left(c_2 + \int_0^t e^{s}dW^1(s)-\int_0^t e^{s}dW^2(s)\right). \]
+Therefore, the solution of this SDE is:
+\[\begin{cases}
+X^1 &= \frac{c_1 e^t + c_2 e^{-t}}{2} + \int_0^t \frac{e^{t-s}+e^{s-t}}{2}dW^1(s) + \int_0^t \frac{e^{t-s}-e^{s-t}}{2}dW^2(s)\\
+X^2 &= \frac{c_1 e^t - c_2 e^{-t}}{2} + \int_0^t \frac{e^{t-s}-e^{s-t}}{2}dW^1(s) + \int_0^t \frac{e^{t-s}+e^{s-t}}{2}dW^2(s).
+\end{cases}\]
+
+\paragraph{Problem 49} Solve
+\[\begin{cases}
+dX &= \frac12 \sigma'(X)\sigma(X)dt + \sigma(X) dW\\
+X(0) &= 0
+\end{cases}\]
+where $W$ is a one-dimensional Brownian motion and $\sigma$ is a smooth, positive function.\\
+(Hint: Let $f(x):=\int_0^x \frac{dy}{\sigma(y)}$ and set $g:=f^{-1}$, the inverse function of $f$. Show that $X=g(W)$.)
+
+
+\paragraph{Solution of Problem 49} Denote function $f(x):=\int_0^x \frac{dy}{\sigma(y)}$ and $Y = f(X)$. Then $Y(0)=0$ and 
+\begin{equation*}
+\begin{aligned}
+dY &= f'(X) dX + \frac12 f''(X)\cdot\sigma^2(X) dt = \frac{1}{\sigma(X)}dX -\frac{\sigma'(X)}{2\sigma^2(X)}\cdot  \sigma^2(X) dt\\
+&= \frac12 \sigma'(X)dt + dW - \frac12 \sigma'(X)dt = dW.
+\end{aligned}    
+\end{equation*}
+Since $Y(0)=0$, we have: $Y(t)=W(t)$. Therefore, the solution of the SDE is:
+\[X = f^{-1}(Y)=g(W).\]
+
+
+\paragraph{Problem 50} Let $\tau$ be the first time a one-dimensional Brownian motion hits the half-open interval $(a,b]$. Show that $\tau$ is a stopping time. 
+
+\paragraph{Solution of Problem 50} We are going to prove $\tau$ is a stopping time by the definition. When $a<0\leqslant b$, we have $\tau=0$, which means for $\forall t \geqslant 0$, the event $\{\tau\leqslant t\}$ is always true. When $a\leqslant 0$, it holds that:
+\[\{\tau> t\} = \{\forall s\leqslant t, W(s)\leqslant a\}\in \mathcal F(t).\]
+When $b>0$, it holds that:
+\[\{\tau> t\} = \{\forall s\leqslant t, W(s)>b\}\in \mathcal F(t).\]
+To sum up, $\tau$ is a stopping time, which comes to our conclusion.
+
+\paragraph{Problem 51} Let $\mathbf{W}$ denote an $n$-dimensional Brownian motion for $n\geqslant 3$. Write $\mathbf{X}=\mathbf{W}+x_0$, where the point $x_0$ lies in the region $U=\{0<R_1<|x|<R_2\}$. Calculate explicitly the probability that $\mathbf{X}$ will hit the outer sphere $\{|x|=R_2\}$ before hitting the inner sphere $\{|x|=R_1\}$. \\
+(Hint: Check that
+\[\Phi(x)=\frac{1}{|x|^{n-2}}\]
+satisfies $\Delta\Phi=0$ for $x\neq 0$. Modify $\Phi$ to build a function $u$ which equals 0 on the inner sphere and 1 on the outer sphere. 
+
+\paragraph{Solution of Problem 51} Suppose the probability function we want is $u(x)$ where $R_1<|x|<R_2$. Then the function $u$ satisfies the following conditions.
+\begin{equation*}
+\begin{cases}
+\nabla u &= 0\\
+u(x) &= 0 \mbox{$|x|=R_1$}\\
+u(x) &= 1 \mbox{$|x|=R_2$}
+\end{cases}    
+\end{equation*}
+As we see, for $\Phi(x)=\frac{1}{|x|^{n-2}}$, we have:
+\[\frac{\partial}{\partial x_i}\Phi(x) =\sum_{i=1}^{n}-\frac{(n-2)x_i}{|x|^n},~\frac{\partial^2}{\partial x_i^2}\Phi(x) =\sum_{i=1}^{n}-\frac{(n-2)}{|x|^n}+\frac{n(n-2)x_i^2}{|x|^{n+2}}.\]
+Therefore:
+\[\Delta\Phi = \sum_{i=1}^{n}-\frac{(n-2)}{|x|^n}+\frac{n(n-2)x_i^2}{|x|^{n+2}} = -\frac{n(n-2)}{|x|^n}+\frac{n(n+2)}{|x|^n}=0.\]
+So, for any constant $a,b$, we have $\Delta(a\Phi+b)=0$. Let 
+\[a = -\frac{R_1^{n-2}R_2^{n-2}}{R_2^{n-2}-R_1^{n-2}},~b=\frac{R_2^{n-2}}{R_2^{n-2}-R_1^{n-2}}.\]
+Then, function $a\Phi+b$ meets our satisfaction. To sum up, the probability function we need is:
+\[u(x)=\frac{R_2^{n-2}}{R_2^{n-2}-R_1^{n-2}}\cdot\left(1-\frac{R_1^{n-2}}{|x|^{n-2}}\right).\]
 
 \end{document}
