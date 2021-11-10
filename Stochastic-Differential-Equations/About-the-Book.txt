@@ -1,1 +1,10 @@
+Title: An Introduction to Stochastic Differential Equations
+Author: Lawrence C.Evans
+American Mathematical Society
 
+Chapter 1. Introduction
+Chapter 2. A Crash Course in Probability Theory
+Chapter 3. Brownian Motion and "White Noise"
+Chapter 4. Stochastic Integrals
+Chapter 5. Stochastic Differential Equations
+Chapter 6. Applications
